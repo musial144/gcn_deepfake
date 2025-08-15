@@ -12,11 +12,12 @@ from sklearn.metrics import precision_score, recall_score, f1_score, confusion_m
 from collections import Counter
 from sklearn.model_selection import train_test_split
 import os
+import gc
 
 
 
 
-FEATURES_NUM  = 512 # liczba cech każdego węzłe - tutaj jest to liczba kolorów każdego piksela
+FEATURES_NUM  = 514 # liczba cech każdego węzłe - tutaj jest to liczba kolorów każdego piksela
 FIRST_LAYER_OUT_CH = 256 # Liczba cech na wyjściu pierwszej 
 SECOUND_LAYER_OUT_CH = 128
 THIRD_LAYER_OUT_CH = 64
@@ -32,10 +33,16 @@ LAST_LAYER_OUT_CH = 2 # Liczba cech na wyjściu drugiej (ostatniej) warstwy
 class GCN(torch.nn.Module):
    def __init__(self):
        super().__init__()
-       self.conv1 = GCNConv(in_channels = FEATURES_NUM, out_channels = 128) 
+       self.conv1 = GCNConv(in_channels = FEATURES_NUM, out_channels = 64) 
     #    self.conv2 = GCNConv(in_channels = 256, out_channels = 128) 
-       self.conv3 = GCNConv(in_channels = 128, out_channels = 32) 
-       self.conv4 = GCNConv(in_channels = 32, out_channels = LAST_LAYER_OUT_CH) 
+    #    self.conv3 = GCNConv(in_channels = 128, out_channels = 32) 
+       self.conv4 = GCNConv(in_channels = 64, out_channels = LAST_LAYER_OUT_CH) 
+    #    self.head = nn.Sequential(
+    #        nn.Linear(32, 64),
+    #        nn.Relu(inplace=True),
+    #        nn.Dropout(p = 0.3),
+    #        nn.Linear(64,2)
+    #    )
    
    def forward(self, x, edge_index, batch):
        x = self.conv1(x, edge_index)
@@ -46,21 +53,24 @@ class GCN(torch.nn.Module):
     #    x = F.relu(x)
     #    x = F.dropout(x, p=0.3, training=self.training)
 
-       x = self.conv3(x, edge_index)
-       x = F.relu(x)
-       x = F.dropout(x, p=0.3, training=self.training)
+    #    x = self.conv3(x, edge_index)
+    #    x = F.relu(x)
+    #    x = F.dropout(x, p=0.3, training=self.training)
 
        x = self.conv4(x, edge_index)
        x = global_mean_pool(x, batch) # labelki bez tego były tylko do jednego obrazu. Tutaj przypisujemy tę samą labelkę to całego obrazu
        
-       return F.log_softmax(x, dim=1) # można spróbować zwrócić goły x + zastosować crossentropy zamiast NLLLoss
+    #    x = self.head(x)
+    #    return F.log_softmax(x, dim=1) # można spróbować zwrócić goły x + zastosować crossentropy zamiast NLLLoss
+       return x
    
 # model = GCN()
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-# device = 'cpu'
+# device = torch.device('cpu')
 model = GCN().to(device)
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
-criterion = torch.nn.NLLLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.0001, weight_decay=0.00001)
+# criterion = torch.nn.NLLLoss()
+criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.05)
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
 
@@ -69,6 +79,9 @@ resnet18.fc = nn.Identity() # ostatnia warstwa (klasyfikacyjna) zamiast predykcj
 resnet18 = resnet18.to(device)
 resnet18.eval() # przechodzimy w tryb "predykcji" - na dalszym etapie wyskakiwał błąd, ponieważ niektóre operacje nie są dozwolone w trybie (treningu?? - chyba taki tryb jest domyślnie włączony)
 torch.backends.cudnn.benchmark = True
+
+scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.5, patience=3)
+
 
 # ------------------------
 # trenowanie modelu
@@ -92,10 +105,15 @@ def evaluate(data):
 
     correct  = 0 
     total = 0
+    total_loss = 0
 
     for batch in data:
         batch = batch.to(device)
-        _, pred =  model(batch.x, batch.edge_index, batch.batch).max(dim=1)
+        out = model(batch.x, batch.edge_index, batch.batch)#.max(dim=1)
+        loss = criterion(out, batch.y)
+        total_loss += loss
+
+        _, pred = out.max(dim=1)
 
         y_true.extend(batch.y.detach().cpu().numpy())
         y_pred.extend(pred.detach().cpu().numpy())
@@ -108,20 +126,22 @@ def evaluate(data):
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
     specificity = tn / (tn + fp)
     acc = correct / total
+    avg_loss = total_loss / total
+
+    # print("Pred:", y_pred[:20])
+    # print("True:", y_true[:20])
+
+    # print("correct: {}, total: {}:".format(correct, total))
+    # print("tn: {}, fp: {}, fn: {}, tp: {}".format(tn, fp, fn, tp))
+    # print(f"Dokładność klasyfikacji: {acc:.2%}")
+    # print(f"precyzja klasyfikacji: {precision:.2%}")
+    # print(f"recall klasyfikacji: {recall:.2%}")
+    # print(f"f1 klasyfikacji: {f1:.2%}")
+    # print(f"specificity klasyfikacji: {specificity:.2%}")
+    # print('avg_loss: {}'.format(avg_loss))
 
 
-    print("Pred:", y_pred[:20])
-    print("True:", y_true[:20])
-
-    print("correct: {}, total: {}:".format(correct, total))
-    print("tn: {}, fp: {}, fn: {}, tp: {}".format(tn, fp, fn, tp))
-    print(f"Dokładność klasyfikacji: {acc:.2%}")
-    print(f"precyzja klasyfikacji: {precision:.2%}")
-    print(f"recall klasyfikacji: {recall:.2%}")
-    print(f"f1 klasyfikacji: {f1:.2%}")
-    print(f"specificity klasyfikacji: {specificity:.2%}")
-
-    return [acc, precision, recall, f1, specificity]
+    return [acc, precision, recall, f1, specificity, avg_loss]
 
 def save_model():
     torch.save({
@@ -133,7 +153,7 @@ def load_model():
     if os.path.exists('gcn_model.pth'):
         checkpoint = torch.load('gcn_model.pth')
         model.load_state_dict(checkpoint['model_state_dict'])
-        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        # optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         print('Załądowano model z pliku')
     else:
         print('Plik modelu nie istnieje')
@@ -146,7 +166,7 @@ def create_edges(image_size, patch_size):
     for row in range(h):
         for col in range(w):
             idx = row*w + col 
-            for dx, dy in [(-1, -1), (-1, 0), (-1, -1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]: # łączenie pikseli krawędziami boki + po skosie 
+            for dx, dy in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]: # łączenie pikseli krawędziami boki + po skosie 
             # for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]: # łączenie pikseli krawędziami same boki 
                 nrow, ncol = row + dx, col + dy 
                 if 0 <= nrow < h and 0 <= ncol < w:
@@ -196,9 +216,9 @@ def load_pictures(dir_path, transform, image_size, patch_size, start_pic, end_pi
 
 # używamy RESNET18 do ekstrachowania cech z patchy
 @torch.no_grad()
-def extract_features(all_img_patches, patch_size, batch_size):
-    # przenoszę eval jako jedno wywołanie - globalne - nigdzie nie zmieniamy na .train(), więc nie powinno być problemu
-    # resnet18.eval() # przechodzimy w tryb "predykcji" - na dalszym etapie wyskakiwał błąd, ponieważ niektóre operacje nie są dozwolone w trybie (treningu?? - chyba taki tryb jest domyślnie włączony)
+def extract_features(all_img_patches,IMAGE_SIZE, PATCH_SIZE):
+    print("2. Ekstrachujemy cechy za pomocą resnet".center(60, '-'))
+    batch_size = (IMAGE_SIZE // PATCH_SIZE) ** 2
 
     # with torch.no_grad():
     all_img_patch_features = []
@@ -207,7 +227,7 @@ def extract_features(all_img_patches, patch_size, batch_size):
         patches = patches.to(device, non_blocking = True)
 
         # patches = F.interpolate(patches, size=(patch_size, patch_size), mode='bilinear', align_corners=False)  # tutaj w zasadzie ten resize_ chyba nie potrzebny, bo już mamy [1,3,16,16], ale nie wiem czy nie będzie trzeba zmienić wymiarów inputu na 254x254 - do sprawdzenia
-        # patches = F.interpolate(patches, size=(224, 224), mode='bilinear', align_corners=False)  # tutaj w zasadzie ten resize_ chyba nie potrzebny, bo już mamy [1,3,16,16], ale nie wiem czy nie będzie trzeba zmienić wymiarów inputu na 254x254 - do sprawdzenia
+        patches = F.interpolate(patches, size=(224, 224), mode='bilinear', align_corners=False)  # tutaj w zasadzie ten resize_ chyba nie potrzebny, bo już mamy [1,3,16,16], ale nie wiem czy nie będzie trzeba zmienić wymiarów inputu na 254x254 - do sprawdzenia
 
         patch_features = []
         # for patch in patches:
@@ -235,15 +255,33 @@ def extract_features(all_img_patches, patch_size, batch_size):
     
     return all_img_patch_features
 
-def create_dataset(patches_fake, patches_real, PATCH_SIZE, IMAGE_SIZE, FAKE_LABEL, REAL_LABEL, edge_index, split_ratio):
-    
-    print("2. Ekstrachujemy cechy za pomocą resnet".center(60, '-'))
-    # używamy RESNET18 do ekstrachowania cech z patchy
-    batch_size = (IMAGE_SIZE // PATCH_SIZE) ** 2
-    all_img_x_fake = extract_features(patches_fake, PATCH_SIZE, batch_size)
-    all_img_x_real = extract_features(patches_real, PATCH_SIZE, batch_size)
 
-    # img = transforms.ToTensor()(img) 
+def save_features(all_img_features, out_dir, start_pic_idx):
+    os.makedirs(out_dir, exist_ok=True)
+
+    for i, feats in enumerate(all_img_features):
+        torch.save(feats.cpu(), os.path.join(out_dir, f"features_{start_pic_idx + i}.pt"))
+
+
+def load_features(features_dir, start_pic_idx, end_pic_idx):
+    all_img_features = []
+    i = 0
+    paths = sorted(glob.glob(os.path.join(features_dir, "features_*.pt")))
+    for path in paths:
+        i+=1 
+        
+        if i < start_pic_idx:
+            continue
+        if i > end_pic_idx:
+            break
+
+        data = torch.load(path, map_location='cpu', weights_only=False)
+        all_img_features.append(data.to(device))
+
+    return all_img_features
+
+
+def create_dataset(all_img_x_fake, all_img_x_real, PATCH_SIZE, IMAGE_SIZE, FAKE_LABEL, REAL_LABEL, edge_index, split_ratio):
 
     print("4. Tworzymy dataset".center(60, '-'))
     data_parted = []
@@ -254,21 +292,13 @@ def create_dataset(patches_fake, patches_real, PATCH_SIZE, IMAGE_SIZE, FAKE_LABE
     for x in all_img_x_real:
         data_parted.append(Data(x=x, edge_index=edge_index, y=torch.tensor([REAL_LABEL])).to(device))
 
+    coords = make_coords(IMAGE_SIZE, PATCH_SIZE)
+
+    for i, d in enumerate(data_parted):
+        data_parted[i] = add_coords(d, coords)
 
     labels = [d.y.item() for d in data_parted]
     print("Label count:", Counter(labels))
-
-    # split_ratio = 0.8
-    # split_data_idx = int(len(data_parted) * split_ratio)
-    # if split_ratio == 1.0:
-    #     data_parted_train = []
-    #     data_parted_test = data_parted
-    # elif split_ratio == 0.0:
-    #     data_parted_train = data_parted
-    #     data_parted_test = []
-    # else:
-    #     data_parted_train = data_parted[:split_data_idx]
-    #     data_parted_test = data_parted[split_data_idx:]
 
     labels = [d.y.item() for d in data_parted]
     data_parted_train, data_parted_test = train_test_split(data_parted, test_size=1-split_ratio, stratify=labels, random_state=42)
@@ -279,7 +309,44 @@ def create_dataset(patches_fake, patches_real, PATCH_SIZE, IMAGE_SIZE, FAKE_LABE
     if data_parted_train:
         data_train = DataLoader(data_parted_train, batch_size=16, shuffle=True)
     if data_parted_test:
-        # data_test = DataLoader(data_parted_test, batch_size=16, shuffle=True)
         data_test = DataLoader(data_parted_test, batch_size=16, shuffle=False)
 
     return [data_train, data_test]
+
+
+def make_coords(IMAGE_SIZE, PATCH_SIZE):
+    h = IMAGE_SIZE// PATCH_SIZE
+    w = IMAGE_SIZE// PATCH_SIZE
+    coords = []
+    for r in range(h):
+        for c in range(w):
+            coords.append([r/(h-1), c/(w-1)])
+
+    return torch.tensor(coords).to(device)
+
+
+def add_coords(data, coords):
+    data.x = torch.cat([data.x, coords], dim=1) # 512 -> 514 features (dochodzą koordynaty)
+
+    return data 
+
+# def save_features(dir_path, transform, image_size, patch_size):
+#     for pic_path in glob.glob(dir_path):
+
+#         image = Image.open(pic_path).convert("RGB")
+#         image = transform(image)
+        
+#         patches = []
+#         for i in range(0, image_size, patch_size):
+#             for j in range(0, image_size, patch_size):
+#                patch = image[:, i:i+patch_size, j:j+patch_size]
+#                patches.append(patch)
+        
+#         patches = torch.stack(patches)
+
+def clear_memory():
+    gc.collect()
+
+    if torch.cuda.is_available():
+         torch.cuda.empty_cache()
+         torch.cuda.ipc_collect()
