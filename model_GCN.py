@@ -33,34 +33,44 @@ LAST_LAYER_OUT_CH = 2 # Liczba cech na wyjściu drugiej (ostatniej) warstwy
 class GCN(torch.nn.Module):
    def __init__(self):
        super().__init__()
-       self.conv1 = GCNConv(in_channels = FEATURES_NUM, out_channels = 64) 
+       self.conv1 = GCNConv(in_channels = FEATURES_NUM, out_channels = 128) 
+    #    self.conv1_2 = GCNConv(in_channels = 256, out_channels = 256) 
+    #    self.conv1_3 = GCNConv(in_channels = 256, out_channels = 256) 
     #    self.conv2 = GCNConv(in_channels = 256, out_channels = 128) 
-    #    self.conv3 = GCNConv(in_channels = 128, out_channels = 32) 
-       self.conv4 = GCNConv(in_channels = 64, out_channels = LAST_LAYER_OUT_CH) 
-    #    self.head = nn.Sequential(
-    #        nn.Linear(32, 64),
-    #        nn.Relu(inplace=True),
-    #        nn.Dropout(p = 0.3),
-    #        nn.Linear(64,2)
-    #    )
+    #    self.conv2_2 = GCNConv(in_channels = 128, out_channels = 128) 
+    #    self.conv2_3 = GCNConv(in_channels = 128, out_channels = 128) 
+    #    self.conv3 = GCNConv(in_channels = 128, out_channels = 64) 
+    #    self.conv3_2 = GCNConv(in_channels = 64, out_channels = 64) 
+    #    self.conv3_3 = GCNConv(in_channels = 64, out_channels = 64) 
+       self.conv4 = GCNConv(in_channels = 128, out_channels = 2) 
+    #    self.conv4_2 = GCNConv(in_channels = 32, out_channels = 32) 
+    #    self.conv4_3 = GCNConv(in_channels = 32, out_channels = 32) 
+    #    self.head = nn.Linear(32,2)
+       
    
    def forward(self, x, edge_index, batch):
        x = self.conv1(x, edge_index)
        x = F.relu(x)
-       x = F.dropout(x, p=0.3, training=self.training)
+       x = F.dropout(x, p=0.5, training=self.training)
 
     #    x = self.conv2(x, edge_index)
     #    x = F.relu(x)
-    #    x = F.dropout(x, p=0.3, training=self.training)
+    #    x = F.dropout(x, p=0.5, training=self.training)
 
     #    x = self.conv3(x, edge_index)
     #    x = F.relu(x)
     #    x = F.dropout(x, p=0.3, training=self.training)
 
        x = self.conv4(x, edge_index)
-       x = global_mean_pool(x, batch) # labelki bez tego były tylko do jednego obrazu. Tutaj przypisujemy tę samą labelkę to całego obrazu
+    #    x = F.relu(x)
+    #    x = F.dropout(x, p=0.5, training=self.training)
+
+    #    x = global_mean_pool(x, batch) # labelki bez tego były tylko do jednego obrazu. Tutaj przypisujemy tę samą labelkę to całego obrazu
        
     #    x = self.head(x)
+       
+       x = global_mean_pool(x, batch) # labelki bez tego były tylko do jednego obrazu. Tutaj przypisujemy tę samą labelkę to całego obrazu
+
     #    return F.log_softmax(x, dim=1) # można spróbować zwrócić goły x + zastosować crossentropy zamiast NLLLoss
        return x
    
@@ -68,7 +78,8 @@ class GCN(torch.nn.Module):
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # device = torch.device('cpu')
 model = GCN().to(device)
-optimizer = torch.optim.Adam(model.parameters(), lr=0.0001, weight_decay=0.00001)
+init_lr = 0.001
+optimizer = torch.optim.Adam(model.parameters(), lr=init_lr, weight_decay=0.00001)
 # criterion = torch.nn.NLLLoss()
 criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.05)
 logger = logging.getLogger(__name__)
@@ -97,6 +108,8 @@ def train(data):
    
    return loss.item()
 
+
+@torch.no_grad()
 def evaluate(data):
     model.eval()
     
@@ -111,12 +124,12 @@ def evaluate(data):
         batch = batch.to(device)
         out = model(batch.x, batch.edge_index, batch.batch)#.max(dim=1)
         loss = criterion(out, batch.y)
-        total_loss += loss
+        total_loss += float(loss)
 
         _, pred = out.max(dim=1)
 
-        y_true.extend(batch.y.detach().cpu().numpy())
-        y_pred.extend(pred.detach().cpu().numpy())
+        y_true.extend(batch.y.cpu().numpy())
+        y_pred.extend(pred.cpu().numpy())
         correct += int((pred == batch.y).sum())
         total += batch.y.size(0)
 
@@ -125,8 +138,8 @@ def evaluate(data):
     f1 = f1_score(y_true, y_pred, average='binary', zero_division=0)
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
     specificity = tn / (tn + fp)
-    acc = correct / total
-    avg_loss = total_loss / total
+    acc = correct / max(total, 1)
+    avg_loss = total_loss / max(total, 1)
 
     # print("Pred:", y_pred[:20])
     # print("True:", y_true[:20])
@@ -227,7 +240,7 @@ def extract_features(all_img_patches,IMAGE_SIZE, PATCH_SIZE):
         patches = patches.to(device, non_blocking = True)
 
         # patches = F.interpolate(patches, size=(patch_size, patch_size), mode='bilinear', align_corners=False)  # tutaj w zasadzie ten resize_ chyba nie potrzebny, bo już mamy [1,3,16,16], ale nie wiem czy nie będzie trzeba zmienić wymiarów inputu na 254x254 - do sprawdzenia
-        patches = F.interpolate(patches, size=(224, 224), mode='bilinear', align_corners=False)  # tutaj w zasadzie ten resize_ chyba nie potrzebny, bo już mamy [1,3,16,16], ale nie wiem czy nie będzie trzeba zmienić wymiarów inputu na 254x254 - do sprawdzenia
+        patches = F.interpolate(patches, size=(224, 224), mode='bicubic', align_corners=False)  # tutaj w zasadzie ten resize_ chyba nie potrzebny, bo już mamy [1,3,16,16], ale nie wiem czy nie będzie trzeba zmienić wymiarów inputu na 254x254 - do sprawdzenia
 
         patch_features = []
         # for patch in patches:
@@ -239,11 +252,12 @@ def extract_features(all_img_patches,IMAGE_SIZE, PATCH_SIZE):
             # output = resnet18(input_tensor)
             # patch_features.append(output)
             patch = patches[i:i+batch_size]
-            if device == 'cuda':
-                with torch.cuda.amp.autocast(device_type = 'cuda'):
-                    output = resnet18(patch)
-            else:
-                output = resnet18(patch)
+            output = resnet18(patch)
+            # if device.type == 'cuda':
+            #     with torch.cuda.amp.autocast(True):
+            #         output = resnet18(patch)
+            # else:
+            #     output = resnet18(patch)
 
             patch_features.append(output)
           
@@ -260,6 +274,7 @@ def save_features(all_img_features, out_dir, start_pic_idx):
     os.makedirs(out_dir, exist_ok=True)
 
     for i, feats in enumerate(all_img_features):
+        feats = feats.to(torch.float16).cpu()
         torch.save(feats.cpu(), os.path.join(out_dir, f"features_{start_pic_idx + i}.pt"))
 
 
@@ -281,9 +296,9 @@ def load_features(features_dir, start_pic_idx, end_pic_idx):
     return all_img_features
 
 
-def create_dataset(all_img_x_fake, all_img_x_real, PATCH_SIZE, IMAGE_SIZE, FAKE_LABEL, REAL_LABEL, edge_index, split_ratio):
+def create_dataset(all_img_x_fake, all_img_x_real, PATCH_SIZE, IMAGE_SIZE, FAKE_LABEL, REAL_LABEL, edge_index, ifTrain):
 
-    print("4. Tworzymy dataset".center(60, '-'))
+    # print("4. Tworzymy dataset".center(60, '-'))
     data_parted = []
 
     for x in all_img_x_fake:
@@ -301,17 +316,22 @@ def create_dataset(all_img_x_fake, all_img_x_real, PATCH_SIZE, IMAGE_SIZE, FAKE_
     print("Label count:", Counter(labels))
 
     labels = [d.y.item() for d in data_parted]
-    data_parted_train, data_parted_test = train_test_split(data_parted, test_size=1-split_ratio, stratify=labels, random_state=42)
+    # data_parted_train, data_parted_test = train_test_split(data_parted, test_size=1-split_ratio, stratify=labels, random_state=42)
 
-
+    data_parted_train = data_parted
     data_train, data_test = [], []
+    if_shuffle = False
+
+    if ifTrain:
+        if_shuffle = True
 
     if data_parted_train:
-        data_train = DataLoader(data_parted_train, batch_size=16, shuffle=True)
-    if data_parted_test:
-        data_test = DataLoader(data_parted_test, batch_size=16, shuffle=False)
+        # data_train = DataLoader(data_parted_train, batch_size=16, shuffle=True)
+        data_train = DataLoader(data_parted_train, batch_size=16, shuffle=if_shuffle)
+    # if data_parted_test:
+        # data_test = DataLoader(data_parted_test, batch_size=16, shuffle=False)
 
-    return [data_train, data_test]
+    return data_train
 
 
 def make_coords(IMAGE_SIZE, PATCH_SIZE):
