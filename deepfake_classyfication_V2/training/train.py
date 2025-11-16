@@ -42,9 +42,13 @@ def main(cfg_path="configs/default.yaml"):
 
     logger.info(f"START TRAIN")
     for epoch in range(cfg.train.epochs):
-        model.train()
         for batch in tqdm(train_loader):
             loss = trainer.step_batch(batch, criterion)
+            total_norm = 0.0
+            for p in model.parameters():
+                if p.grad is not None:
+                    total_norm += p.grad.data.norm(2).item()
+            print(f"[DEBUG] grad_norm={total_norm:.4f}")
         metrics = trainer.evaluate(val_loader)
         logger.info(f"Epoch {epoch}: acc={metrics['acc']:.4f}, auc={metrics['auc']:.4f}, f1={metrics['f1']:.4f}")
 

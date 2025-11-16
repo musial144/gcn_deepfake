@@ -11,6 +11,7 @@ class Trainer:
 
 
     def step_batch(self, batch, criterion):
+        self.model.train()
         labels = torch.stack([b["label"] for b in batch]).to(self.device)
         self.optimizer.zero_grad(set_to_none=True)
         
@@ -36,6 +37,9 @@ class Trainer:
         preds = logits.argmax(dim=-1)
         acc = accuracy_score(labels.cpu(), preds.cpu())
         
+        probs = logits.softmax(dim=-1)[:,1]
+        print(f"[DEBUG] val prob mean={probs.mean():.3f}, std={probs.std():.3f}")
+
         try:
             auc = roc_auc_score(labels.cpu(), probs.cpu())
         except Exception:

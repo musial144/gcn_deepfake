@@ -26,6 +26,7 @@ graph:
 # model
 model:
   clip_name: "ViT-B/32" # domyślny = "ViT-B/32"
+  clip_pretrained: 'openai'
   clip_trainable: false # "zamrożony" = false ➜ brak gradów
   gat:
     in_dim: 512 # zgodny z CLIP projection dim

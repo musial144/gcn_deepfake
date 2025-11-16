@@ -10,7 +10,7 @@ class GraphClassifier(nn.Module):
     def __init__(self, cfg):
         super().__init__()
         self.device =  torch.device('cuda' if torch.cuda.is_available() else 'cpu') 
-        self.clip_extr =  CLIPExtractor(cfg.model.clip_name, cfg.model.clip_trainable)
+        self.clip_extr =  CLIPExtractor(cfg.model.clip_name, cfg.model.clip_pretrained)
         in_dim = self.clip_extr.out_dim + 2  # doklejamy 2 wartości dla coord's
         self.gnn = GATv2(in_dim, cfg.model.gat.hidden_dim, cfg.model.gat.out_dim, cfg.model.gat.heads1, cfg.model.gat.heads2, cfg.model.gat.dropout)
         self.head = nn.Sequential (
