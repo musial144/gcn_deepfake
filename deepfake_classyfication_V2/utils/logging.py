@@ -1,10 +1,21 @@
 import logging
 
 def get_logger(output_path):
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-    )
-    logging.FileHandler(output_path, mode='a', encoding = 'utf-8')
+    logger = logging.getLogger("deepfake_logger")
+    logger.setLevel(logging.INFO)
 
-    return logging.getLogger()
+    formatter = logging.Formatter(
+        "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+    )
+
+    file_handler = logging.FileHandler(output_path, mode='a', encoding = 'utf-8')
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(formatter) 
+    logger.addHandler(console_handler)
+
+    return logger

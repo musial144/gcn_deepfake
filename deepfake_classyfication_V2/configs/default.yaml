@@ -1,51 +1,59 @@
 seed: 42
 output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
 log_output_path: logi.log
+is_train_available: true
 
 # dane
 data:
   root: 
-    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
-    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
-    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+    # train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    # test:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test  
+    # val:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+    #
+    train:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test:   C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test  
+    val:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validate
+    #
+    # train: 
+    # test:   
+    # val: 
   img_Height: 256 # rozmiar skalowania obrazu przed patche’ami
   img_Width: 256
   patch_size: 32
   num_workers: 8
   train_split: train
   val_split: val
-  max_img_no: 200
+  max_img_no: 1000 #10 #200
   mean: [0.48145466, 0.4578275, 0.40821073] # CLIP
   std: [0.26862954, 0.26130258, 0.27577711]
 
 
 # graf
 graph:
-  knn_k: 6
+  knn_k: 10
 
 # model
 model:
-  clip_name: "ViT-B/32" # domyślny = "ViT-B/32"
+  clip_name: "ViT-B-16" # domyślny = "ViT-B/32"
   clip_pretrained: 'openai'
-  clip_trainable: false # "zamrożony" = false ➜ brak gradów
+  clip_trainable: false #false # "zamrożony" = false ➜ brak gradów
   gat:
-    in_dim: 512 # zgodny z CLIP projection dim
+    in_dim: 514 #512 # zgodny z CLIP projection dim
     hidden_dim: 256
-    out_dim: 4
+    out_dim: 2
     num_layers: 3
     heads1: 4
     heads2: 4
-    dropout: 0.2
+    dropout: 0.0 #0.2
 
 
 # trening
 train:
-  batch_size_images: 8
-  lr: 3e-4
-  weight_decay: 0.05
-  epochs: 30
-  optimizer: "adamw"
-  scheduler: "cosine"
-  warmup_epochs: 2
+  batch_size_images: 8 #2 #8
+  lr: 1e-3 #3e-3 #3e-4
+  weight_decay: 1e-5 #0.0 #0.05
+  epochs: 30 #30
   label_smoothing: 0.0
   class_weights: null

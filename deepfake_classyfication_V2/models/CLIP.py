@@ -8,7 +8,7 @@ Klasa obsługująca ekstrakchę cech z patchy. Definiuje ekstraktor z biblioteki
 oraz procedurę do ekstrakcji cech, która z wskazanego patch'a wydobywa i zwraca jego cechy
 """
 class CLIPExtractor(torch.nn.Module):
-    def __init__(self, model_name="ViT-B/32", pretrained = 'openai'):
+    def __init__(self, model_name="ViT-B-32", pretrained = 'openai'):
         super().__init__()
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model, _, self.preprocess = open_clip.create_model_and_transforms(
@@ -30,7 +30,11 @@ class CLIPExtractor(torch.nn.Module):
     def extract_features(self, patch_tensor: torch.Tensor) -> torch.Tensor:
         patch_tensor = self._scale_patch(patch_tensor)
 
-        feats = self.model.encode_image(patch_tensor)
-        feats /= feats.norm(dim=-1, keepdim=True)
+        # feats = self.model.encode_image(patch_tensor, proj = False)
+        feats = self.model.visual(patch_tensor)
+        # feats może być [B, tokens, D] albo [B, D] zależnie od modelu
+        if feats.ndim == 3:
+            feats = feats[:, 0, :]
+        # feats /= feats.norm(dim=-1, keepdim=True)
         
         return feats

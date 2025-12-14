@@ -1,0 +1,783 @@
+2025-12-04 19:09:00,220 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+log_output_path: logi.log
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 5000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-32
+  clip_pretrained: openai
+  clip_trainable: true
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-04 19:09:07,757 | INFO | deepfake_logger | START TRAIN
+2025-12-04 19:12:31,409 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-04 19:12:31,413 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+log_output_path: logi.log
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 5000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-32
+  clip_pretrained: openai
+  clip_trainable: true
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-04 19:12:37,351 | INFO | deepfake_logger | START TRAIN
+2025-12-04 22:23:36,129 | INFO | deepfake_logger | Epoch 0: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-05 07:58:20,264 | INFO | deepfake_logger | Epoch 1: acc=0.5000, auc=0.5037, f1=0.0000
+2025-12-05 11:13:35,747 | INFO | deepfake_logger | Epoch 2: acc=0.5000, auc=0.5212, f1=0.6667
+2025-12-05 14:32:23,223 | INFO | deepfake_logger | Epoch 3: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-05 19:11:57,566 | INFO | deepfake_logger | Epoch 4: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-05 22:31:07,728 | INFO | deepfake_logger | Epoch 5: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-06 07:56:52,788 | INFO | deepfake_logger | Epoch 6: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-06 11:12:21,368 | INFO | deepfake_logger | Epoch 7: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-06 14:34:55,584 | INFO | deepfake_logger | Epoch 8: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-06 17:53:54,876 | INFO | deepfake_logger | Epoch 9: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-06 21:09:21,293 | INFO | deepfake_logger | Epoch 10: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-07 06:17:16,949 | INFO | deepfake_logger | Epoch 11: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-07 09:31:38,172 | INFO | deepfake_logger | Epoch 12: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-07 12:45:48,998 | INFO | deepfake_logger | Epoch 13: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-07 16:03:05,544 | INFO | deepfake_logger | Epoch 14: acc=0.5000, auc=0.5084, f1=0.6667
+2025-12-07 19:18:23,443 | INFO | deepfake_logger | Epoch 15: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-07 22:32:09,148 | INFO | deepfake_logger | Epoch 16: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-08 06:27:11,809 | INFO | deepfake_logger | Epoch 17: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-08 09:43:43,003 | INFO | deepfake_logger | Epoch 18: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-08 12:59:30,832 | INFO | deepfake_logger | Epoch 19: acc=0.5000, auc=0.4996, f1=0.0000
+2025-12-08 16:16:56,984 | INFO | deepfake_logger | Epoch 20: acc=0.5000, auc=0.4998, f1=0.0000
+2025-12-08 19:32:00,810 | INFO | deepfake_logger | Epoch 21: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-08 22:45:13,541 | INFO | deepfake_logger | Epoch 22: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-09 07:56:28,499 | INFO | deepfake_logger | Epoch 23: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-09 11:11:00,011 | INFO | deepfake_logger | Epoch 24: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-09 14:25:09,975 | INFO | deepfake_logger | Epoch 25: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-09 17:39:08,225 | INFO | deepfake_logger | Epoch 26: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-09 20:52:53,291 | INFO | deepfake_logger | Epoch 27: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-09 22:52:02,323 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-09 22:52:02,328 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 5000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-32
+  clip_pretrained: openai
+  clip_trainable: true
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-09 22:52:11,112 | INFO | deepfake_logger | START TRAIN
+2025-12-10 05:16:50,041 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-10 05:16:50,046 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 5000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-32
+  clip_pretrained: openai
+  clip_trainable: true
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-10 05:16:55,669 | INFO | deepfake_logger | START TRAIN
+2025-12-10 08:29:21,005 | INFO | deepfake_logger | Epoch 0: acc=0.5000, auc=0.5352, f1=0.6667
+2025-12-10 08:29:21,858 | INFO | deepfake_logger | Saved best model (AUC=0.5352) to outputs\run1\best_model1.pth
+2025-12-10 11:42:59,585 | INFO | deepfake_logger | Epoch 1: acc=0.5000, auc=0.5828, f1=0.6667
+2025-12-10 11:43:00,414 | INFO | deepfake_logger | Saved best model (AUC=0.5828) to outputs\run1\best_model1.pth
+2025-12-10 14:58:23,108 | INFO | deepfake_logger | Epoch 2: acc=0.5000, auc=0.5325, f1=0.0000
+2025-12-10 18:13:00,164 | INFO | deepfake_logger | Epoch 3: acc=0.5000, auc=0.5170, f1=0.6667
+2025-12-10 21:26:47,487 | INFO | deepfake_logger | Epoch 4: acc=0.5000, auc=0.5084, f1=0.0000
+2025-12-11 05:35:53,610 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-11 05:35:53,614 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 2000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-11 05:37:05,907 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-11 05:37:05,911 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 2000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-11 05:39:11,793 | INFO | deepfake_logger | START TRAIN
+2025-12-11 12:39:12,134 | INFO | deepfake_logger | Epoch 0: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-11 12:39:12,963 | INFO | deepfake_logger | Saved best model (AUC=0.5000) to outputs\run1\best_model1.pth
+2025-12-11 19:41:58,201 | INFO | deepfake_logger | Epoch 1: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-12 08:38:39,432 | INFO | deepfake_logger | Epoch 2: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-12 15:41:31,328 | INFO | deepfake_logger | Epoch 3: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-12 22:43:46,975 | INFO | deepfake_logger | Epoch 4: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-13 11:25:45,590 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-13 11:25:45,596 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 50
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-13 11:25:57,076 | INFO | deepfake_logger | START TRAIN
+2025-12-13 11:36:32,091 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-13 11:36:32,096 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 50
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-13 11:36:35,841 | INFO | deepfake_logger | START TRAIN
+2025-12-13 11:50:25,315 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-13 11:50:25,320 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 50
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-13 11:50:28,530 | INFO | deepfake_logger | START TRAIN
+2025-12-13 12:02:10,993 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-13 12:02:10,998 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 50
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-13 12:02:14,317 | INFO | deepfake_logger | START TRAIN
+2025-12-13 17:36:47,259 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-13 17:36:47,264 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validate
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 50
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.003
+  weight_decay: 0.05
+  epochs: 30
+  optimizer: adamw
+  warmup_epochs: 2
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-13 17:36:51,845 | INFO | deepfake_logger | START TRAIN
+2025-12-13 17:47:20,445 | INFO | deepfake_logger | Epoch 0: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-13 17:47:21,302 | INFO | deepfake_logger | Saved best model (AUC=0.5000) to outputs\run1\best_model1.pth
+2025-12-13 17:57:50,437 | INFO | deepfake_logger | Epoch 1: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-13 18:08:20,063 | INFO | deepfake_logger | Epoch 2: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-13 18:18:50,045 | INFO | deepfake_logger | Epoch 3: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-13 18:29:19,532 | INFO | deepfake_logger | Epoch 4: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-13 18:39:50,355 | INFO | deepfake_logger | Epoch 5: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-13 18:50:20,414 | INFO | deepfake_logger | Epoch 6: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-13 18:51:48,639 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-13 18:51:48,644 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validate
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 1000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 8
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 512
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 1
+  lr: 0.003
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-13 18:51:52,058 | INFO | deepfake_logger | START TRAIN
+2025-12-13 21:49:14,309 | INFO | deepfake_logger | Epoch 0: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-13 21:49:15,159 | INFO | deepfake_logger | Saved best model (AUC=0.5000) to outputs\run1\best_model1.pth
+2025-12-14 07:08:50,138 | INFO | deepfake_logger | Epoch 1: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-14 10:11:22,427 | INFO | deepfake_logger | Epoch 2: acc=0.5000, auc=0.5000, f1=0.6667
+2025-12-14 13:09:53,045 | INFO | deepfake_logger | Epoch 3: acc=0.5000, auc=0.5000, f1=0.0000
+2025-12-14 13:59:14,104 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-14 13:59:14,109 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validate
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 1000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-14 13:59:18,009 | INFO | deepfake_logger | START TRAIN
+2025-12-14 14:31:08,043 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2025-12-14 14:31:08,048 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
+    test: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test
+    val: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validate
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 1000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2025-12-14 14:31:08,237 | INFO | deepfake_logger | len(train_loader)=250 len(val_loader)=175
+2025-12-14 14:31:11,337 | INFO | deepfake_logger | START TRAIN
