@@ -8,16 +8,16 @@ is_train_available: true
 # dane
 data:
   root: 
-    train:  ../utils/images/Final_Dataset/Train
-    test:  ../utils/images/Final_Dataset/Test  
-    val:  ../utils/images/Final_Dataset/Validation
+    train:  utils/images/Final_Dataset/Train
+    test:  utils/images/Final_Dataset/Test  
+    val:  utils/images/Final_Dataset/Validation
   img_Height: 256 # rozmiar skalowania obrazu przed patche’ami
   img_Width: 256
   patch_size: 32
   num_workers: 8
   train_split: train
   val_split: val
-  max_img_no: 1000 #10 #200
+  max_img_no: 1000000 #10 #200
   mean: [0.48145466, 0.4578275, 0.40821073] # CLIP
   std: [0.26862954, 0.26130258, 0.27577711]
 
