@@ -8,17 +8,9 @@ is_train_available: true
 # dane
 data:
   root: 
-    # train: C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Train
-    # test:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Test  
-    # val:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Dataset/Validation
-    #
-    train:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Train
-    test:   C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Test  
-    val:  C:/Users/lukas/Desktop/MAGISTERKA/praca_dyplomowa/kod_pracy/pictures/Final_Dataset/Validate
-    #
-    # train: 
-    # test:   
-    # val: 
+    train:  ../utils/images/Final_Dataset/Train
+    test:  ../utils/images/Final_Dataset/Test  
+    val:  ../utils/images/Final_Dataset/Validation
   img_Height: 256 # rozmiar skalowania obrazu przed patche’ami
   img_Width: 256
   patch_size: 32
