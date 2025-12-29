@@ -51,6 +51,7 @@ def main(cfg_path="configs/default.yaml"):
     criterion = torch.nn.CrossEntropyLoss()
 
     best_auc = 0.0
+    start_epoch = 0
     save_model_path = Path(cfg.output_dir) / cfg.model_to_save_path
     save_model_path.parent.mkdir(parents=True, exist_ok=True)
 
