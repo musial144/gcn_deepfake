@@ -3,7 +3,7 @@ output_dir: outputs/run1
 model_to_save_path: best_model1.pth
 saved_model_path: best_model1.pth
 log_output_path: logi.log
-is_train_available: true
+is_train_available: false
 
 # dane
 data:

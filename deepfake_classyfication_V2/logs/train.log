@@ -1,0 +1,11 @@
+Rozpoczynamy wczytywanie ścieżki utils/images/Final_Dataset/Train/Real
+Rozpoczynamy wczytywanie ścieżki utils/images/Final_Dataset/Train/Fake
+Rozpoczynamy wczytywanie ścieżki utils/images/Final_Dataset/Validation/Real
+Rozpoczynamy wczytywanie ścieżki utils/images/Final_Dataset/Validation/Fake
+Rozpoczynamy wczytywanie ścieżki utils/images/Final_Dataset/Test/Real
+Rozpoczynamy wczytywanie ścieżki utils/images/Final_Dataset/Test/Fake
+[DEBUG] val prob mean=0.574, std=0.476
+[DEBUG] val preds distribution: {0: 563, 1: 752}
+[DEBUG] first 20 labels:     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[DEBUG] first 20 preds:      [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0]
+[DEBUG] first 20 probs_cls1: [0.012215189635753632, 2.11510200642806e-06, 0.9985806941986084, 5.219330523331678e-10, 0.30391499400138855, 0.48963645100593567, 0.006925202440470457, 4.027912448023585e-10, 7.584523700643331e-05, 0.9616542458534241, 0.7605552673339844, 6.619400494400907e-08, 1.0442266784593812e-06, 9.335490602779828e-08, 0.002468057442456484, 0.9987301230430603, 0.004536309279501438, 0.2827174663543701, 0.6018253564834595, 0.0048973532393574715]
