@@ -8,6 +8,8 @@ from models.classifier import GraphClassifier
 from utils.logging import get_logger
 from tqdm import tqdm
 from pathlib import Path
+import os
+
 
 
 def collate_list(batch):
@@ -53,14 +55,22 @@ def main(cfg_path="configs/default.yaml"):
     save_model_path.parent.mkdir(parents=True, exist_ok=True)
 
     try:
-        model.load_state_dict(torch.load(Path(cfg.output_dir) / cfg.saved_model_path, map_location="cpu"))
+        # model.load_state_dict(torch.load(Path(cfg.output_dir) / cfg.saved_model_path, map_location="cpu"))
+        ckpt = torch.load(save_model_path, map_location="cpu")
+        model.load_state_dict(ckpt["model"])
+        optim.load_state_dict(ckpt["optim"])
+        scheduler.load_state_dict(ckpt["scheduler"])
+        best_auc = ckpt.get("best_auc", 0.0)
+        start_epoch = ckpt.get("epoch", -1) + 1
+        logger.info(f"Resumed from {save_model_path} at epoch={start_epoch}, best_auc={best_auc:.4f}")
     except:
         None
 
     trainer = Trainer(model, optim, scheduler)
 
     logger.info(f"START TRAIN")
-    for epoch in range(cfg.train.epochs):
+    # for epoch in range(cfg.train.epochs):
+    for epoch in range(start_epoch, cfg.train.epochs):
         if not cfg.is_train_available:
             logger.info(f"STOP TRAIN - cfg.is_train_available <> True")
             break
@@ -91,7 +101,15 @@ def main(cfg_path="configs/default.yaml"):
 
         if metrics["auc"] > best_auc:
                 best_auc = metrics["auc"]
-                torch.save(model.state_dict(), save_model_path)
+                # torch.save(model.state_dict(), save_model_path)
+                torch.save({
+                    "epoch": epoch,
+                    "model": model.state_dict(),
+                    "optim": optim.state_dict(),
+                    "scheduler": scheduler.state_dict(),
+                    "best_auc": best_auc,
+                    "cfg_path": cfg_path,
+                }, save_model_path)
                 logger.info(f"Saved best model (AUC={best_auc:.4f}) to {save_model_path}")
 
     if not cfg.is_train_available:
