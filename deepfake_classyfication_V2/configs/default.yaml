@@ -3,21 +3,21 @@ output_dir: outputs/run1
 model_to_save_path: best_model1.pth
 saved_model_path: best_model1.pth
 log_output_path: logi.log
-is_train_available: false
+is_train_available: true
 
 # dane
 data:
   root: 
-    train:  utils/images/Final_Dataset/Train
-    test:  utils/images/Final_Dataset/Test  
-    val:  utils/images/Final_Dataset/Validation
+    train:  utils/images/Deep_vs_Real/Train
+    test:  utils/images/Deep_vs_Real/Test  
+    val:  utils/images/Deep_vs_Real/Validation
   img_Height: 256 # rozmiar skalowania obrazu przed patche’ami
   img_Width: 256
   patch_size: 32
   num_workers: 8
   train_split: train
   val_split: val
-  max_img_no: 1000000 #10 #200
+  max_img_no: 8000000 #10 #200
   mean: [0.48145466, 0.4578275, 0.40821073] # CLIP
   std: [0.26862954, 0.26130258, 0.27577711]
 
