@@ -43,27 +43,40 @@ class Trainer:
             all_logits.append(logits)
             all_labels.append(labels)
         
-        logits = torch.cat(all_logits)
-        labels = torch.cat(all_labels)
+        logits = torch.cat(all_logits, dim=0)
+        labels = torch.cat(all_labels, dim=0).view(-1)
         
-        probs = logits.softmax(dim=-1)[:,1]
-        preds = logits.argmax(dim=-1)
-        acc = accuracy_score(labels.cpu(), preds.cpu())
+        # probs = logits.softmax(dim=-1)[:,1]
+        # preds = logits.argmax(dim=-1)
+        probs = torch.softmax(logits, dim=-1)[:,1]
+        preds = torch.argmax(logits, dim=-1)
+
+        y_true = labels.cpu().numpy()
+        y_pred = preds.cpu().numpy()
+        y_prob = probs.cpu().numpy()
+
+        # acc = accuracy_score(labels.cpu(), preds.cpu())
+        acc = accuracy_score(y_true, y_pred)
         
-        probs = logits.softmax(dim=-1)[:,1]
+        # probs = torch.softmax(logits, dim=-1)[:,1]
         print(f"[DEBUG] val prob mean={probs.mean():.3f}, std={probs.std():.3f}")
         unique, counts = torch.unique(preds, return_counts=True)
         print("[DEBUG] val preds distribution:", dict(zip(unique.tolist(), counts.tolist())))
-
-        try:
-            auc = roc_auc_score(labels.cpu(), probs.cpu())
-        except Exception:
-            auc = float('nan')
-        
-        f1 = f1_score(labels.cpu(), preds.cpu())
 
         print("[DEBUG] first 20 labels:    ", labels[:20].tolist())
         print("[DEBUG] first 20 preds:     ", preds[:20].tolist())
         print("[DEBUG] first 20 probs_cls1:", probs[:20].tolist())
 
+        try:
+            # auc = roc_auc_score(labels.cpu(), probs.cpu())
+            auc = roc_auc_score(y_true, y_prob)
+        except Exception:
+            auc = float('nan')
+        
+        try:
+            # f1 = f1_score(labels.cpu(), preds.cpu())
+            f1 = f1_score(y_true, y_pred, average='binary')
+        except Exception:
+            f1 = float('nan')
+        # f1 = f1_score(labels.cpu(), preds.cpu())
         return {"acc": acc, "auc": auc, "f1": f1}

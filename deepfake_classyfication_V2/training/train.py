@@ -16,6 +16,7 @@ def collate_list(batch):
     return batch
 
 def main(cfg_path="configs/default.yaml"):
+    # ładujemy ustawienia początkowe - plik config, logger, device
     cfg = OmegaConf.load(cfg_path) 
     set_seed(cfg.seed)
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -24,23 +25,26 @@ def main(cfg_path="configs/default.yaml"):
     logger.info("-".ljust(49, 'x'))
     logger.info("CONFIG:\n" + OmegaConf.to_yaml(cfg))
 
+    # ładujemy dane
     base_train = ImageDataset(cfg.data.root.train, cfg.data.max_img_no)
     base_val = ImageDataset(cfg.data.root.val, cfg.data.max_img_no)
     base_test = ImageDataset(cfg.data.root.test, cfg.data.max_img_no)
 
 
+    # 
     train_ds = PatchDataset(base_train, cfg.data.img_Height, cfg.data.img_Width, cfg.data.patch_size, cfg.data.mean, cfg.data.std)
     val_ds = PatchDataset(base_val, cfg.data.img_Height, cfg.data.img_Width, cfg.data.patch_size, cfg.data.mean, cfg.data.std)
     test_ds = PatchDataset(base_test, cfg.data.img_Height, cfg.data.img_Width, cfg.data.patch_size, cfg.data.mean, cfg.data.std)
 
 
+    #
     train_loader = DataLoader(train_ds, batch_size=cfg.train.batch_size_images, shuffle=True, collate_fn=collate_list)
     val_loader = DataLoader(val_ds, batch_size=cfg.train.batch_size_images, shuffle=False, collate_fn=collate_list)
     test_loader = DataLoader(test_ds, batch_size=cfg.train.batch_size_images, shuffle=False, collate_fn=collate_list)
 
     logger.info(f"len(train_loader)={len(train_loader)} len(val_loader)={len(val_loader)}")
 
-
+    # 
     model = GraphClassifier(cfg).to(device)
 
     steps_per_epoch = len(train_loader)

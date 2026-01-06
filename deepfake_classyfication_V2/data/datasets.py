@@ -8,13 +8,25 @@ import torch
 
 """
 Klasa obsługująca wczytywanie zdjęć, przechowuje listę zdjęć i zwraca zdjęcie
-o zadanym indeksie 
+o zadanym indeksie. 
+
+PARAMETRY:
+    path       - ścieżka do katalogu ze zdjęciami do wczytania. Zakładamy, że katalog zawiera
+                 podkatalogi "Real" oraz "Fake", przeznaczone dla posegregowanych zbiorów zdjęć
+                 prawdziwych i fałszywych. Parametr jest konfigurowalny w configu
+    max_img_no - liczba oznaczająca ile zdjęć wczytamy. Liczba ta dotyczy obu podkatalogów 
+                 ("Fake", "Real") osobno. Parametr konfugurowalny w configu
+
+PROCEDURY:
+    _len_()     - zwracamy liczbę przechowywanych ścieżek do zdjęć
+    _getitem_() - dla wskazanego indeksu zdjęcia, pobiera jego ścieżkę z listym, wczytuje
+                  i zwraca zdjęcie 
 """
 class ImageDataset(Dataset):
     def __init__(self, path: str, max_img_no: int):
-        self.path = Path(path)
-        self.max_img_no = max_img_no
-        self.img_list = []
+        self.path = Path(path)          # ścieżka do pliku
+        self.max_img_no = max_img_no    # max liczba zdjęć do wczytania
+        self.img_list = []              # lista ścieżek do zdjęć 
 
         for label_name in ("Real", "Fake"):
             label_dir = self.path / label_name 
@@ -24,7 +36,6 @@ class ImageDataset(Dataset):
             print("Rozpoczynamy wczytywanie ścieżki " + str(label_dir))
 
             for p in sorted(label_dir.rglob("*")):
-                # print("Rozpoczynamy wczytywanie ścieżki " + str(label_dir))
                 img_no += 1
                 if img_no > max_img_no: 
                     break
@@ -41,7 +52,21 @@ class ImageDataset(Dataset):
         
 
 """
-Przechowuje dataset obrazów w formie klasy ImageDataset + przechowuje metadane (pozycje patchy, labelki, id obrazu ...),
+Przechowuje dataset obrazów w formie klasy ImageDataset
+
+PARAMETRY:
+    dataset    - lista plików ze zdjęciami do analizy - klasa ImageDataset
+    img_Height - wysokość pliku do jakiej chcemy go przeskalować. Do zmiany w configu
+    img_Width  - szerokość pliku do jakiej chcemy go przeskalować. Do zmiany w configu
+    patch_size - rozmiar patcha, czyli fragmentu obrazu, który zostanie poddany ekstrakcji cech i podany jako wierzchołek grafu. Do zmiany w configu
+    mean       - średnia potrzebna do normalizacji obrazu. Do zmiany w configu
+    std        - odchylenie standardowe potrzebne do normalizacji obrazu. Do zmiany w configu
+
+PROCEDURY:
+        _len_() - zwraca liczbę zdjęć przechowywanych w zmiennej "dataset"
+        _extract_patches() - dzieli wskazany obraz na fragmenty, zapisuje je jako listę wraz z informacją o ich położeniu na zdjęciu (coordy). 
+                            1Listę fragmentów i coordów zwraca osobno 
+        _getitem_() - pobiera obraz z datasetu, ekstrachuje jego cechy za pomocą _estract_patches()
 wymiary obrazów do jakich należy je przeskalować
 Zawiera również procedurę do obsługi podziału wskazanych zdjęć na patche. """
 class PatchDataset(Dataset):
