@@ -65,10 +65,9 @@ PARAMETRY:
 PROCEDURY:
         _len_() - zwraca liczbę zdjęć przechowywanych w zmiennej "dataset"
         _extract_patches() - dzieli wskazany obraz na fragmenty, zapisuje je jako listę wraz z informacją o ich położeniu na zdjęciu (coordy). 
-                            1Listę fragmentów i coordów zwraca osobno 
-        _getitem_() - pobiera obraz z datasetu, ekstrachuje jego cechy za pomocą _estract_patches()
-wymiary obrazów do jakich należy je przeskalować
-Zawiera również procedurę do obsługi podziału wskazanych zdjęć na patche. """
+                             Listę fragmentów i coordów zwraca osobno 
+        _getitem_() - pobiera obraz z datasetu, ekstrachuje jego cechy za pomocą _estract_patches() i zwraca słownik z patchami, coordami, etykietą oraz ścieżką do obrazu
+        """
 class PatchDataset(Dataset):
     
     def __init__(self, dataset: ImageDataset, img_Height: int, img_Width: int, patch_size: int, mean, std):
