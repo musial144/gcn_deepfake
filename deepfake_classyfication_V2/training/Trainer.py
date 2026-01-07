@@ -1,7 +1,16 @@
 import torch
 from sklearn.metrics import accuracy_score, roc_auc_score, f1_score
 
-
+"""
+Klasa zarządzająca procesem trenowania i ewaluacji modelu. 
+PARAMETRY:
+    model     - model do trenowania/ewaluacji
+    optimizer - optymalizator wykorzystywany podczas trenowania
+    scheduler - scheduler zmieniający współczynnik uczenia podczas trenowania
+PROCEDURY:
+    step_batch() - wykonuje krok trenowania na pojedynczym batchu danych, zwraca wartość straty (loss)
+    evaluate()   - wykonuje ewaluację modelu na podanym dataloaderze, zwraca słownik z metrykami (accuracy, AUC, F1)
+"""
 class Trainer:
     def __init__(self, model, optimizer, scheduler):
         self.model = model

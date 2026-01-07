@@ -5,7 +5,15 @@ from .GATv2 import GATv2
 from graph.builder import build_graph_from_patches_coords
 from torch_geometric.data import Batch
 
-
+"""
+    Klasa zarządzająca modelem klasyfikatora składającego się z ekstraktora cech CLIP, grafowego modelu GNN (GATv2) oraz head (głowy klasyfikatora).
+    PARAMETRY:
+        cfg - konfiguracja modelu, zawiera parametry ekstraktora CLIP, GNN oraz inne ustawienia
+    PROCEDURY:
+        forward_single() - przetwarza pojedynczy obraz podzielony na patche. Ekstrahuje cechy patchy za pomocą CLIP, buduje graf z patchy i ich koordynatów, zwraca graf
+        forward() - przetwarza batch obrazów, wywołując forward_single() dla każdego z nich, który zwraca graf cech patchy, łączy wyniki w batch i przekazuje przez GNN 
+        oraz head, zwraca logits (wyniki klasyfikacji)
+"""
 class GraphClassifier(nn.Module):
     def __init__(self, cfg):
         super().__init__()

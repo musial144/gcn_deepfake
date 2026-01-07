@@ -4,7 +4,16 @@ from torch_geometric.nn import GATv2Conv, global_mean_pool
 from torch_geometric.data import Data
 
 
-""" Definiujemy model GATv2, który z cech wyodrębnionych analizuje wskazane cechy wyesktrachowane z listy patchy obrazu
+""" Definiujemy model GATv2, który analizuje wskazany graf cech wyesktrachowanych z listy patchy obrazu
+PARAMETRY:
+    in_dim   - Rozmiar wejściowej warstwy (cech wierzchołków grafu). Konfigurowalne w pliku config.yaml
+    hid      - Rozmiar ukrytej warstwy GATv2. Konfigurowalne w pliku config.yaml
+    out_dim  - Rozmiar wyjściowej warstwy grafu (zagregowanego grafu cech). Konfigurowalne w pliku config.yaml
+    heads1   - liczba głów w pierwszej warstwie GATv2. Konfigurowalne w pliku config.yaml
+    heads2   - liczba głów w drugiej warstwie GATv2. Konfigurowalne w pliku config.yaml
+    dropout  - współczynnik dropout w warstwach GATv2. Konfigurowalne w pliku config.yaml
+PROCEDURY:
+    forward() - przetwarza graf cech patchy, zwraca zagregowane cechy grafu 
 """
 class GATv2(nn.Module):
     def __init__(self, in_dim, hid=256, out_dim=2, heads1=4, heads2=4, dropout=0.5):

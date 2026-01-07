@@ -4,8 +4,14 @@ import torch
 import torch.nn.functional as F
 
 """
-Klasa obsługująca ekstrakchę cech z patchy. Definiuje ekstraktor z biblioteki CLIP
-oraz procedurę do ekstrakcji cech, która z wskazanego patch'a wydobywa i zwraca jego cechy
+Klasa obsługująca ekstrakchę cech z patchy. Wykorzystuje model CLIP z biblioteki open_clip. 
+PARAMETRY:
+    model_name  - nazwa modelu CLIP do wykorzystania. Konfigurowalne w pliku config.yaml
+    pretrained  - czy wykorzystać model wstępnie wytrenowany (pretrained='openai') 
+                  czy losowo zainicjalizowany (pretrained=None). Konfigurowalne w pliku configu.yaml
+PROCEDURY:
+    _scale_patch()     - skaluje patch do rozmiaru wymaganego przez model CLIP (224x224). Rozmiar konfigurowalny w pliku config.yaml
+    extract_features() - ekstrahuje cechy z patcha za pomocą modelu CLIP. Nie klasyfikuje, zwraca jedynie cechy
 """
 class CLIPExtractor(torch.nn.Module):
     def __init__(self, model_name="ViT-B-32", pretrained = 'openai'):

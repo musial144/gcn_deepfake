@@ -1,5 +1,6 @@
 import logging
 
+"""Procedura tworząca logger do zapisywania informacji o przebiegu trenowania i ewaluacji modelu w pliku oraz na konsoli."""
 def get_logger(output_path):
     logger = logging.getLogger("deepfake_logger")
     logger.setLevel(logging.INFO)

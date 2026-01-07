@@ -3,6 +3,7 @@ import random
 import torch
 import numpy as np
 
+"""Ustawiamy ziarno losowości dla różnych bibliotek, aby zapewnić powtarzalność wyników trenowania i ewaluacji modelu."""
 def set_seed(seed: int = 42) -> None:
     os.environ["PYTHONHASHSEED"] = str(seed)
     
