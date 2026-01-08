@@ -13,7 +13,7 @@ PROCEDURY:
 """
 class Trainer:
     def __init__(self, model, optimizer, scheduler):
-        self.model = model.to(torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
+        self.model = model
         self.optimizer = optimizer
         self.scheduler = scheduler
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') 
