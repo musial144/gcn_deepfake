@@ -1749,3 +1749,863 @@ train:
 2025-12-30 18:56:16,643 | INFO | deepfake_logger | Epoch 27: acc=0.9929, auc=0.9997, f1=0.9929
 2025-12-30 19:26:57,369 | INFO | deepfake_logger | Epoch 28: acc=0.9921, auc=0.9997, f1=0.9921
 2025-12-30 19:57:48,213 | INFO | deepfake_logger | Epoch 29: acc=0.9934, auc=0.9997, f1=0.9934
+2026-01-03 12:34:49,827 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-03 12:34:49,832 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-03 12:34:52,539 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-03 12:34:58,520 | INFO | deepfake_logger | Resumed from outputs/run1/best_model1.pth at epoch=27, best_auc=0.9998
+2026-01-03 12:34:58,520 | INFO | deepfake_logger | START TRAIN
+2026-01-03 12:47:54,500 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-03 12:47:54,502 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-03 12:47:57,248 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-03 12:47:59,196 | INFO | deepfake_logger | START TRAIN
+2026-01-03 14:54:01,708 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-03 14:54:01,710 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-03 14:54:04,292 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-03 14:54:06,059 | INFO | deepfake_logger | START TRAIN
+2026-01-03 22:03:52,849 | INFO | deepfake_logger | Epoch 0: acc=0.8004, auc=0.9253, f1=0.8230
+2026-01-03 22:03:54,394 | INFO | deepfake_logger | Saved best model (AUC=0.9253) to outputs/run1/best_model1.pth
+2026-01-04 05:11:24,552 | INFO | deepfake_logger | Epoch 1: acc=0.8745, auc=0.9578, f1=0.8646
+2026-01-04 05:11:25,947 | INFO | deepfake_logger | Saved best model (AUC=0.9578) to outputs/run1/best_model1.pth
+2026-01-07 04:37:05,072 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-07 04:37:05,092 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-07 04:37:20,692 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-07 04:37:45,681 | INFO | deepfake_logger | Resumed from outputs/run1/best_model1.pth at epoch=2, best_auc=0.9578
+2026-01-07 04:37:45,684 | INFO | deepfake_logger | START TRAIN
+2026-01-07 17:52:14,457 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-07 17:52:14,477 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-07 17:52:30,283 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-07 17:52:52,058 | INFO | deepfake_logger | Resumed from outputs/run1/best_model1.pth at epoch=2, best_auc=0.9578
+2026-01-07 17:52:52,061 | INFO | deepfake_logger | START TRAIN
+2026-01-07 18:00:32,645 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-07 18:00:32,662 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-07 18:00:48,174 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-07 18:01:10,164 | INFO | deepfake_logger | Error during loading model from outputs/run1/best_model1.pth. Training from scratch.
+2026-01-07 18:01:10,168 | INFO | deepfake_logger | START TRAIN
+2026-01-07 18:11:54,860 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-07 18:11:54,879 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-07 18:12:11,430 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-07 18:12:33,541 | INFO | deepfake_logger | Error during loading model from outputs/run1/best_model1.pth. Training from scratch.
+2026-01-07 18:12:33,544 | INFO | deepfake_logger | START TRAIN
+2026-01-07 18:20:40,960 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-07 18:20:40,980 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-07 18:20:56,824 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-07 18:21:19,947 | INFO | deepfake_logger | Error during loading model from outputs/run1/best_model1.pth. Training from scratch.
+2026-01-07 18:21:19,960 | INFO | deepfake_logger | START TRAIN
+2026-01-07 22:12:34,082 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-07 22:12:34,102 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-07 22:12:49,821 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-07 22:13:11,041 | INFO | deepfake_logger | Error during loading model from outputs/run1/best_model1.pth. Training from scratch.
+2026-01-07 22:13:11,055 | INFO | deepfake_logger | START TRAIN
+2026-01-07 22:21:03,186 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-07 22:21:03,205 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-07 22:21:18,405 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-07 22:21:34,752 | INFO | deepfake_logger | Error during loading model from outputs/run1/best_model1.pth. Training from scratch.
+2026-01-07 22:21:34,765 | INFO | deepfake_logger | START TRAIN
+2026-01-08 04:22:31,868 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-08 04:22:31,888 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-08 04:22:47,284 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-08 04:23:09,010 | INFO | deepfake_logger | Resumed from outputs/run1/best_model1.pth at epoch=2, best_auc=0.9578
+2026-01-08 04:23:09,013 | INFO | deepfake_logger | START TRAIN
+2026-01-10 04:40:47,806 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-10 04:40:47,826 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-10 04:41:03,194 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-10 04:41:28,636 | INFO | deepfake_logger | Resumed from outputs/run1/best_model1.pth at epoch=2, best_auc=0.9578
+2026-01-10 04:41:28,639 | INFO | deepfake_logger | START TRAIN
+2026-01-10 12:06:15,338 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-10 12:06:15,359 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 8000000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-10 12:06:31,124 | INFO | deepfake_logger | len(train_loader)=30001 len(val_loader)=7429
+2026-01-10 12:06:46,158 | INFO | deepfake_logger | Error during loading model from outputs/run1/best_model1.pth. Training from scratch.
+2026-01-10 12:06:46,161 | INFO | deepfake_logger | START TRAIN
+2026-01-11 01:08:30,422 | INFO | deepfake_logger | Epoch 0: acc=0.7942, auc=0.9242, f1=0.8191
+2026-01-11 01:08:36,746 | INFO | deepfake_logger | Saved best model (AUC=0.9242) to outputs/run1/best_model1.pth
+2026-01-11 14:17:04,944 | INFO | deepfake_logger | Epoch 1: acc=0.8642, auc=0.9581, f1=0.8497
+2026-01-11 14:17:11,534 | INFO | deepfake_logger | Saved best model (AUC=0.9581) to outputs/run1/best_model1.pth
+2026-01-12 03:44:58,271 | INFO | deepfake_logger | Epoch 2: acc=0.8947, auc=0.9654, f1=0.8888
+2026-01-12 03:45:05,112 | INFO | deepfake_logger | Saved best model (AUC=0.9654) to outputs/run1/best_model1.pth
+2026-01-12 17:46:57,743 | INFO | deepfake_logger | Epoch 3: acc=0.9098, auc=0.9711, f1=0.9095
+2026-01-12 17:47:04,084 | INFO | deepfake_logger | Saved best model (AUC=0.9711) to outputs/run1/best_model1.pth
+2026-01-13 07:00:23,342 | INFO | deepfake_logger | Epoch 4: acc=0.9313, auc=0.9830, f1=0.9296
+2026-01-13 07:00:30,243 | INFO | deepfake_logger | Saved best model (AUC=0.9830) to outputs/run1/best_model1.pth
+2026-01-13 20:11:54,540 | INFO | deepfake_logger | Epoch 5: acc=0.9294, auc=0.9823, f1=0.9285
+2026-01-14 09:21:36,525 | INFO | deepfake_logger | Epoch 6: acc=0.9317, auc=0.9824, f1=0.9312
+2026-01-14 22:35:42,242 | INFO | deepfake_logger | Epoch 7: acc=0.9186, auc=0.9774, f1=0.9195
+2026-01-15 11:53:39,943 | INFO | deepfake_logger | Epoch 8: acc=0.9278, auc=0.9839, f1=0.9244
+2026-01-15 11:53:46,397 | INFO | deepfake_logger | Saved best model (AUC=0.9839) to outputs/run1/best_model1.pth
+2026-01-16 02:33:43,414 | INFO | deepfake_logger | Epoch 9: acc=0.9404, auc=0.9862, f1=0.9399
+2026-01-16 02:33:49,630 | INFO | deepfake_logger | Saved best model (AUC=0.9862) to outputs/run1/best_model1.pth
+2026-01-16 15:49:08,664 | INFO | deepfake_logger | Epoch 10: acc=0.9386, auc=0.9862, f1=0.9368
+2026-01-17 04:52:28,420 | INFO | deepfake_logger | Epoch 11: acc=0.9328, auc=0.9848, f1=0.9339
+2026-01-17 18:00:08,887 | INFO | deepfake_logger | Epoch 12: acc=0.9370, auc=0.9855, f1=0.9365
+2026-01-18 07:07:06,234 | INFO | deepfake_logger | Epoch 13: acc=0.9411, auc=0.9873, f1=0.9394
+2026-01-18 07:07:12,470 | INFO | deepfake_logger | Saved best model (AUC=0.9873) to outputs/run1/best_model1.pth
+2026-01-18 09:52:18,198 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-18 09:52:18,219 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 25000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-18 09:52:32,682 | INFO | deepfake_logger | len(train_loader)=6250 len(val_loader)=6250
+2026-01-18 09:52:54,709 | INFO | deepfake_logger | Resumed from outputs/run1/best_model1.pth at epoch=14, best_auc=0.9873
+2026-01-18 09:52:54,713 | INFO | deepfake_logger | START TRAIN
+2026-01-18 10:45:05,660 | INFO | deepfake_logger | -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2026-01-18 10:45:05,678 | INFO | deepfake_logger | CONFIG:
+seed: 42
+output_dir: outputs/run1
+model_to_save_path: best_model1.pth
+saved_model_path: best_model1.pth
+log_output_path: logi.log
+is_train_available: true
+data:
+  root:
+    train: utils/images/Dataset/Train
+    test: utils/images/Dataset/Test
+    val: utils/images/Dataset/Validation
+  img_Height: 256
+  img_Width: 256
+  patch_size: 32
+  num_workers: 8
+  train_split: train
+  val_split: val
+  max_img_no: 25000
+  mean:
+  - 0.48145466
+  - 0.4578275
+  - 0.40821073
+  std:
+  - 0.26862954
+  - 0.26130258
+  - 0.27577711
+graph:
+  knn_k: 10
+model:
+  clip_name: ViT-B-16
+  clip_pretrained: openai
+  clip_trainable: false
+  gat:
+    in_dim: 514
+    hidden_dim: 256
+    out_dim: 2
+    num_layers: 3
+    heads1: 4
+    heads2: 4
+    dropout: 0.0
+train:
+  batch_size_images: 8
+  lr: 0.001
+  weight_decay: 1.0e-05
+  epochs: 30
+  label_smoothing: 0.0
+  class_weights: null
+
+2026-01-18 10:45:20,135 | INFO | deepfake_logger | len(train_loader)=6250 len(val_loader)=6250
+2026-01-18 10:45:33,809 | INFO | deepfake_logger | Error during loading model from outputs/run1/best_model1.pth. Training from scratch.
+2026-01-18 10:45:33,812 | INFO | deepfake_logger | START TRAIN
+2026-01-18 15:05:46,088 | INFO | deepfake_logger | Epoch 0: acc=0.6493, auc=0.6965, f1=0.6070
+2026-01-18 15:05:52,298 | INFO | deepfake_logger | Saved best model (AUC=0.6965) to outputs/run1/best_model1.pth
+2026-01-18 19:29:04,985 | INFO | deepfake_logger | Epoch 1: acc=0.6536, auc=0.7093, f1=0.6308
+2026-01-18 19:29:11,480 | INFO | deepfake_logger | Saved best model (AUC=0.7093) to outputs/run1/best_model1.pth
+2026-01-18 23:49:05,565 | INFO | deepfake_logger | Epoch 2: acc=0.6644, auc=0.7192, f1=nan
+2026-01-18 23:49:12,267 | INFO | deepfake_logger | Saved best model (AUC=0.7192) to outputs/run1/best_model1.pth
+2026-01-19 04:18:47,880 | INFO | deepfake_logger | Epoch 3: acc=0.6516, auc=0.7206, f1=nan
+2026-01-19 04:18:54,240 | INFO | deepfake_logger | Saved best model (AUC=0.7206) to outputs/run1/best_model1.pth
+2026-01-19 09:09:50,352 | INFO | deepfake_logger | Epoch 4: acc=0.6702, auc=0.7236, f1=nan
+2026-01-19 09:09:57,022 | INFO | deepfake_logger | Saved best model (AUC=0.7236) to outputs/run1/best_model1.pth
+2026-01-19 13:36:27,588 | INFO | deepfake_logger | Epoch 5: acc=0.6777, auc=0.7277, f1=nan
+2026-01-19 13:36:34,661 | INFO | deepfake_logger | Saved best model (AUC=0.7277) to outputs/run1/best_model1.pth
+2026-01-19 18:00:32,271 | INFO | deepfake_logger | Epoch 6: acc=0.6725, auc=0.7275, f1=nan
+2026-01-19 22:26:36,667 | INFO | deepfake_logger | Epoch 7: acc=0.6673, auc=0.7227, f1=nan
+2026-01-20 02:49:03,202 | INFO | deepfake_logger | Epoch 8: acc=0.6762, auc=0.7277, f1=nan
+2026-01-20 02:49:09,554 | INFO | deepfake_logger | Saved best model (AUC=0.7277) to outputs/run1/best_model1.pth
+2026-01-20 07:12:19,764 | INFO | deepfake_logger | Epoch 9: acc=0.6728, auc=0.7329, f1=nan
+2026-01-20 07:12:26,328 | INFO | deepfake_logger | Saved best model (AUC=0.7329) to outputs/run1/best_model1.pth
+2026-01-20 11:35:00,757 | INFO | deepfake_logger | Epoch 10: acc=0.6715, auc=0.7317, f1=nan
+2026-01-20 15:58:05,586 | INFO | deepfake_logger | Epoch 11: acc=0.6749, auc=0.7196, f1=nan
+2026-01-20 20:21:49,069 | INFO | deepfake_logger | Epoch 12: acc=0.6653, auc=0.7143, f1=nan
+2026-01-21 00:44:49,162 | INFO | deepfake_logger | Epoch 13: acc=0.6783, auc=0.7358, f1=nan
+2026-01-21 00:44:55,211 | INFO | deepfake_logger | Saved best model (AUC=0.7358) to outputs/run1/best_model1.pth
+2026-01-21 05:08:52,686 | INFO | deepfake_logger | Epoch 14: acc=0.6753, auc=0.7318, f1=nan
+2026-01-21 09:31:51,863 | INFO | deepfake_logger | Epoch 15: acc=0.6739, auc=0.7296, f1=nan
+2026-01-21 13:56:59,562 | INFO | deepfake_logger | Epoch 16: acc=0.6776, auc=0.7331, f1=nan
+2026-01-21 18:21:37,281 | INFO | deepfake_logger | Epoch 17: acc=0.6753, auc=0.7268, f1=nan
+2026-01-21 22:45:13,560 | INFO | deepfake_logger | Epoch 18: acc=0.6768, auc=0.7368, f1=nan
+2026-01-21 22:45:19,668 | INFO | deepfake_logger | Saved best model (AUC=0.7368) to outputs/run1/best_model1.pth
+2026-01-22 03:09:21,087 | INFO | deepfake_logger | Epoch 19: acc=0.6762, auc=0.7302, f1=nan
+2026-01-22 07:33:26,963 | INFO | deepfake_logger | Epoch 20: acc=0.6742, auc=0.7296, f1=nan
+2026-01-22 11:58:04,069 | INFO | deepfake_logger | Epoch 21: acc=0.6813, auc=0.7328, f1=nan
+2026-01-22 16:23:43,770 | INFO | deepfake_logger | Epoch 22: acc=0.6799, auc=0.7321, f1=nan
+2026-01-22 20:48:45,357 | INFO | deepfake_logger | Epoch 23: acc=0.6731, auc=0.7333, f1=nan
+2026-01-23 01:13:29,872 | INFO | deepfake_logger | Epoch 24: acc=0.6776, auc=0.7333, f1=nan
+2026-01-23 05:37:41,424 | INFO | deepfake_logger | Epoch 25: acc=0.6758, auc=0.7322, f1=nan
+2026-01-23 10:02:38,756 | INFO | deepfake_logger | Epoch 26: acc=0.6799, auc=0.7343, f1=nan
+2026-01-23 14:28:19,293 | INFO | deepfake_logger | Epoch 27: acc=0.6810, auc=0.7298, f1=nan
+2026-01-23 18:55:08,353 | INFO | deepfake_logger | Epoch 28: acc=0.6811, auc=0.7334, f1=nan
+2026-01-23 23:22:23,859 | INFO | deepfake_logger | Epoch 29: acc=0.6784, auc=0.7385, f1=nan
+2026-01-23 23:22:30,227 | INFO | deepfake_logger | Saved best model (AUC=0.7385) to outputs/run1/best_model1.pth
