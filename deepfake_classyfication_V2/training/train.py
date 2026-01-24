@@ -63,7 +63,7 @@ def main(cfg_path="configs/default.yaml"):
     try:
         # model.load_state_dict(torch.load(Path(cfg.output_dir) / cfg.saved_model_path, map_location="cpu"))
         ckpt = torch.load(save_model_path, map_location="cpu")
-        model = model.load_state_dict(ckpt["model"])
+        model.load_state_dict(ckpt["model"])
         optim.load_state_dict(ckpt["optim"])
         scheduler.load_state_dict(ckpt["scheduler"])
         best_auc = ckpt.get("best_auc", 0.0)
