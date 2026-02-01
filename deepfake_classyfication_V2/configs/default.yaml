@@ -1,9 +1,9 @@
 seed: 42
 output_dir: outputs/run1
-model_to_save_path: best_model1.pth
-saved_model_path: best_model1.pth
+model_to_save_path: v1_Final_Dataset_90acc.pth
+saved_model_path: v1_Final_Dataset_90acc.pth
 log_output_path: logi.log
-is_train_available: true
+is_train_available: false
 
 # dane
 data:
@@ -17,7 +17,7 @@ data:
   num_workers: 8
   train_split: train
   val_split: val
-  max_img_no: 25000 #8000000 #10 #200
+  max_img_no: 8000000 #25000 #8000000 #10 #200
   mean: [0.48145466, 0.4578275, 0.40821073] # CLIP
   std: [0.26862954, 0.26130258, 0.27577711]
 
